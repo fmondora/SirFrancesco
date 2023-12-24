@@ -17,8 +17,8 @@ voucher_data = {
     ],
     "xxx": [
         { "id": "v2", "private": "true", 
-        "title": "🌬️👔💋 Stiratura naked", 
-        "description": "Mi offro di trasformare una semplice stiratura in un'esperienza unica e piccante. Immagina: io, completamente nudo, che mi dedico con attenzione e cura a stirare ogni tuo capo di abbigliamento. Una combinazione perfetta di utilità e seduzione, che aggiunge un pizzico di eccitazione e sorrisi a un'ordinaria faccenda domestica. Sarà un modo per spezzare la routine, aggiungendo un tocco di audacia e divertimento alla nostra giornata. 🎉🔥👚", 
+        "title": "🌬️👔💋 Stiratura Spoile", 
+        "description": "Mi offro di xxx. 🎉🔥👚", 
         "image_url": 
         "https://cdn08.bdsmlr.com/uploads/photos/2019/08/89146/bdsmlr-89146-2KxaR7irOd.jpg", 
         "quantity": 5, 
@@ -26,8 +26,6 @@ voucher_data = {
         # Altri voucher...
     ],
     # Aggiungi altre categorie...
-    # @fmondora - 28576633
-    # @miciamicio - 5941599694
 }
 
 # Ottieni tutti i voucher data per un utente e ritornali nella forma del json 
