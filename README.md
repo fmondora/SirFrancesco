@@ -9,3 +9,11 @@ TELEGRAM_TOKEN="" # il token che arriva da @botfather
 DATABASE_ID = " " #il database che contiene i buoni 
 DATABASE_USERS = ""  #il database users
 NOTION_AUTH = "secret_"
+
+ENV="test"
+if ENV=="test":
+    TELEGRAM_TOKEN="override" #override
+    DATABASE_ID = "override" #production
+    DATABASE_USERS = "override" #production
+    NOTION_AUTH = "override" #production
+    #USER_TEST="override" #Override user
