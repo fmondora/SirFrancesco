@@ -1,0 +1,20 @@
+# Cartella dell'ambiente virtuale
+venv/
+env/
+
+# Se hai altre cartelle per ambienti virtuali con nomi diversi, aggiungile qui
+.nome_altro_ambiente/
+
+# File compilati Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Se utilizzi Jupyter Notebook, potresti voler ignorare anche questi:
+.ipynb_checkpoints
+
+
+config.py
