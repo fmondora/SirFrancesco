@@ -200,5 +200,5 @@ def query_handler(call):
    
 # Avvia il polling
 
-
+print("Starting bot in "+config.ENV)
 bot.polling(none_stop=True)

@@ -2,6 +2,16 @@ from notion_client import Client
 
 import config
 
+from cachetools import cached, TTLCache
+from functools import lru_cache
+
+# Imposta il TTL a 2 ore (7200 secondi)
+TTL = 7200  
+
+# Crea una cache che memorizza fino a 100 elementi e ha un TTL di 2 ore
+cache = TTLCache(maxsize=150, ttl=TTL)
+
+
 
 # Configura il client Notion
 # Sostituisci con il tuo token dell'API di Notion
@@ -30,7 +40,12 @@ voucher_data = {
 
 # Ottieni tutti i voucher data per un utente e ritornali nella forma del json 
 # { categoria : [{ id, private, title, description, image_url, quantity, emettitore }, ]}
+
+@cached(cache)
 def get_voucher_data(user_id):
+    if(config.ENV=="test"):
+        user_id = config.USER_TEST
+
     user_vouchers = get_voucher_for(user_id)  # Ottieni i voucher per l'utente
     updated_voucher_data = {}  # Una nuova struttura per mantenere i dati aggiornati
 
