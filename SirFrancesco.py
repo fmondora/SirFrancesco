@@ -12,21 +12,27 @@ bot = telebot.TeleBot(config.TELEGRAM_TOKEN)
 # Funzione per ottenere il menu principale
 def get_main_menu(user_id):
     categories = database.get_unique_categories(user_id)  # Ottieni le categorie uniche per l'utente
+    all_vouchers = database.get_voucher_data(user_id)  # Ottieni tutti i voucher per l'utente
+    
     markup = types.InlineKeyboardMarkup()
     markup.row_width = 2
     
-    # Aggiungi un bottone per ogni categoria unica
+    # Aggiungi un bottone per ogni categoria unica che ha almeno un voucher disponibile
     for category in categories:
-        markup.add(types.InlineKeyboardButton(category, callback_data=category))
+        # Controlla se la categoria ha almeno un voucher disponibile
+        if any(voucher['quantity'] > 0 for voucher in all_vouchers.get(category, [])):
+            markup.add(types.InlineKeyboardButton(category, callback_data=category))
     
     return markup
+
 
 # Funzione per ottenere i voucher di una specifica categoria
 def get_voucher_menu(category, user_id):
     markup = types.InlineKeyboardMarkup()
     markup.row_width = 2
     for voucher in database.get_voucher_data(user_id).get(category, []):
-        markup.add(types.InlineKeyboardButton(voucher['title'], callback_data=f"voucher_{category}_{voucher['id']}"))
+        if voucher['quantity'] > 0:
+            markup.add(types.InlineKeyboardButton(voucher['title'], callback_data=f"voucher_{category}_{voucher['id']}"))
     markup.add(types.InlineKeyboardButton("👈 Back", callback_data=f'back_to_main'))
     return markup
 
@@ -197,6 +203,9 @@ def query_handler(call):
         if voucher:
             use_voucher(call.message.chat.id, voucher, user_handle, category)
             return
+        
+
+
    
 # Avvia il polling
 
