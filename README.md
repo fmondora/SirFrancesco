@@ -80,11 +80,11 @@ To enhance the user experience and make it easier for users to interact with Sir
 
 Copy and paste the following command list into the @BotFather chat when prompted:
 
-''' 
+```
 start - 🚀 Embark on a journey with Sir Francesco!
 fortune - 🎡 Spin the wheel of fortune!
 info - ℹ️ Curious about Sir Francesco?
-'''
+```
 
 These commands and descriptions will now appear in the command list for users interacting with Sir Francesco. It's a great way to guide users and make the bot feel more friendly and accessible.
 
