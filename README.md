@@ -61,7 +61,7 @@ if ENV=="test":
     DATABASE_USERS = "override"  # Override for production
     NOTION_AUTH = "override"  # Override for production
     #USER_TEST="override" #Override user for testing
-
+```
 ## Configuring Bot Commands via @BotFather
 
 To enhance the user experience and make it easier for users to interact with Sir Francesco, you can configure the bot commands with descriptions and emojis. This provides a quick guide and visual cues for users when they start typing '/' in the chat. Here's how you can set them up via @BotFather:
@@ -80,11 +80,11 @@ To enhance the user experience and make it easier for users to interact with Sir
 
 Copy and paste the following command list into the @BotFather chat when prompted:
 
-''' 
+```
 start - 🚀 Embark on a journey with Sir Francesco!
 fortune - 🎡 Spin the wheel of fortune!
 info - ℹ️ Curious about Sir Francesco?
-'''
+```
 
 These commands and descriptions will now appear in the command list for users interacting with Sir Francesco. It's a great way to guide users and make the bot feel more friendly and accessible.
 
