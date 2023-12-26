@@ -20,6 +20,20 @@ We value your input and contributions! If you are using this software and have a
 
 If you are using this software, we would love to hear how it's being used! Your feedback helps improve the project and guide future development directions. Feel free to open an issue on our GitHub repository to share your experience, send us an email, or just say hi and let us know you're using our software.
 
+
+## Fortune Wheel Feature
+
+### How Does It Work?
+
+- Users initiate the fortune wheel by sending the `/fortunewheel` or `/fortune` command.
+- Once the user spins the wheel, a random voucher from those available to the user is selected.
+- Details of the selected voucher are then presented to the user, offering a unique and engaging experience.
+
+This game adds an element of surprise and fun, engaging users interactively and providing them with the chance to discover new deals and rewards.
+
+
+
+
 ### Contributing to the Code
 
 If you're interested in contributing to the code, check out the open issues or submit a pull request with your changes. Every contribution is welcome!

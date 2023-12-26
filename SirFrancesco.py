@@ -2,6 +2,7 @@ import telebot
 from telebot import types
 import config
 import database
+import random
 
 
 # Inserisci il token del tuo bot qui
@@ -45,7 +46,7 @@ def escape_markdown(text):
 
 
 # Invia i dettagli del voucher
-def send_voucher_details(chat_id, category, voucher):
+def send_voucher_details(chat_id, category, voucher, from_fortuna=False):
     # Prepara il titolo e la descrizione facendo l'escape dei caratteri di Markdown
     title = escape_markdown(voucher['title'])
     descr = escape_markdown(voucher['description'])
@@ -63,7 +64,10 @@ def send_voucher_details(chat_id, category, voucher):
     # Crea la tastiera inline
     markup = types.InlineKeyboardMarkup()
     markup.add(types.InlineKeyboardButton("🍑 Use", callback_data=f'use_{category}_{voucher["id"]}'))
-    markup.add(types.InlineKeyboardButton("👈 Back", callback_data=f'back_to_category_{category}'))
+    if not from_fortuna:
+        markup.add(types.InlineKeyboardButton("👈 Back to start", callback_data='simulate_start'))
+    else:
+        markup.add(types.InlineKeyboardButton("👈 Back", callback_data=f'back_to_category_{category}'))
 
     # Controlla se il voucher è privato e invia l'immagine con lo spoiler
     if voucher.get('private'):
@@ -141,6 +145,27 @@ def send_info(message):
     bot.send_message(message.chat.id, escape_markdown(info_text), parse_mode='MarkdownV2')
 
 
+import random
+
+@bot.message_handler(commands=['fortunewheel', 'fortune', "fortuna", "ruotafortuna"])
+def fortune_wheel(message):
+    user_id = message.from_user.id
+    user_vouchers = database.get_voucher_data(user_id)
+
+    wheel = "🎡🎡 🍎🍌🍒🍇🍍🍓🥝"
+    bot.send_message(message.chat.id, "Gira la ruota della fortuna!\n" + wheel)
+
+    # Estrai tutti i voucher e le categorie disponibili per l'utente
+    available_vouchers = [(category, voucher) for category, vouchers in user_vouchers.items() for voucher in vouchers if voucher['quantity'] > 0]
+
+    # Scegli un voucher casuale dall'elenco
+    if available_vouchers:
+        selected_category, selected_voucher = random.choice(available_vouchers)
+        send_voucher_details(message.chat.id, selected_category, selected_voucher)
+    else:
+        bot.send_message(message.chat.id, "Non hai voucher disponibili al momento.")
+
+
 # Gestore delle callback query
 @bot.callback_query_handler(func=lambda call: True)
 def query_handler(call):
@@ -164,6 +189,10 @@ def query_handler(call):
         back_from_voucher_category(call.message.chat.id, category)
         return
 
+    if call.data == 'simulate_start':
+        # Simula il comando /start chiamando direttamente la funzione send_welcome
+        send_welcome(call.message)
+        return
 
     # Gestione del ritorno al menu della categoria
     if data.startswith('back_to_category_'):
@@ -174,6 +203,8 @@ def query_handler(call):
         except Exception as e:
             print(f"Errore nell'aggiornare la didascalia: {e}")
         return
+    
+
         
     # Gestione della selezione della categoria
     if data in database.get_voucher_data( user_id ):
