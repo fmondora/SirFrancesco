@@ -61,7 +61,7 @@ if ENV=="test":
     DATABASE_USERS = "override"  # Override for production
     NOTION_AUTH = "override"  # Override for production
     #USER_TEST="override" #Override user for testing
-
+```
 ## Configuring Bot Commands via @BotFather
 
 To enhance the user experience and make it easier for users to interact with Sir Francesco, you can configure the bot commands with descriptions and emojis. This provides a quick guide and visual cues for users when they start typing '/' in the chat. Here's how you can set them up via @BotFather:
